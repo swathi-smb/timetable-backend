@@ -1,0 +1,3 @@
+ALTER TABLE users
+ADD COLUMN school_name VARCHAR(255),
+ADD COLUMN department_name VARCHAR(255);

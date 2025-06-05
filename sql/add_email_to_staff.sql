@@ -1,0 +1,1 @@
+ALTER TABLE staff ADD COLUMN email_id VARCHAR(255) NOT NULL UNIQUE AFTER department_id;

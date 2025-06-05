@@ -1,0 +1,2 @@
+ALTER TABLE allocations
+ADD COLUMN subject_name VARCHAR(255) NOT NULL; 
