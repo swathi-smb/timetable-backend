@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import {sequelize} from "../config/db.js";
 import School from "./School.js";
-import Department from "./department.js";
+import Department from "./Department.js";
 
 const Staff = sequelize.define("staff", {
   staff_id: {

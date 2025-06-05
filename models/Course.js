@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/db.js";
-import Department from "./department.js";
+import Department from "./Department.js";
 import School from "./School.js";
 
 const Course = sequelize.define("Course", {

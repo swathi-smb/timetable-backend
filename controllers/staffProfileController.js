@@ -1,6 +1,6 @@
 import Staff from '../models/Staff.js';
 import School from '../models/School.js';
-import Department from '../models/department.js';
+import Department from '../models/Department.js';
 
 // Get staff details by email
 export const getStaffByEmail = async (req, res) => {

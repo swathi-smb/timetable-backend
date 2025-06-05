@@ -2,7 +2,7 @@
 import { DataTypes } from 'sequelize';
 import {sequelize} from '../config/db.js';
 import School from './School.js';
-import Department from './department.js';
+import Department from './Department.js';
 
 const GeneratedTimetable = sequelize.define('GeneratedTimetable', {
   id: {

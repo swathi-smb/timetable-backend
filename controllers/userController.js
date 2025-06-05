@@ -3,7 +3,7 @@ import Student from "../models/Student.js";
 import User from "../models/userModel.js";
 import Staff from "../models/Staff.js";
 import School from "../models/School.js";
-import Department from "../models/department.js";
+import Department from "../models/Department.js";
 import Course from "../models/Course.js";
 import db from "../config/db.js";
 import { Op } from "sequelize";
