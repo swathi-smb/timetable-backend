@@ -1,6 +1,6 @@
 import express from "express";
 import School from "../models/School.js";
-import Department from "../models/Department.js";
+import Department from "../models/department.js";
 import Course from "../models/Course.js";
 import Class from "../models/Class.js";
 import Section from "../models/Section.js";

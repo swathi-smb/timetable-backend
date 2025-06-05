@@ -2,7 +2,7 @@ import PendingUser from '../models/PendingUser.js';
 import User from '../models/userModel.js';
 import Staff from '../models/Staff.js';
 import School from '../models/School.js';
-import Department from '../models/department.js';
+import Department from '../models/epartment.js';
 import Student from '../models/Student.js';
 import bcrypt from 'bcrypt';
 
