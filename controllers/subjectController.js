@@ -200,7 +200,7 @@ export const updateSubject = async (req, res) => {
       subject_name,
       sub_type,
       subject_category,
-      theory_creditSections,
+      theory_credits,
       lab_credits,
       modified_by
     } = req.body;
@@ -213,7 +213,7 @@ export const updateSubject = async (req, res) => {
     }
 
     // Convert credits to numbers
-    const theoryCredits = Number(theory_creditSections) || 0;
+    const theoryCredits = Number(theory_credits) || 0;
     const labCredits = Number(lab_credits) || 0;
 
     console.log("✅ Processed Credits:", { theoryCredits, labCredits });
@@ -222,7 +222,7 @@ export const updateSubject = async (req, res) => {
       subject_name: subject_name || subject.subject_name,
       sub_type: sub_type || subject.sub_type,
       subject_category: subject_category || subject.subject_category,
-      theory_credits: theoryCredits,  // Make sure this is included!
+      theory_credits: theoryCredits,
       lab_credits: labCredits,
       modified_by: modified_by || subject.modified_by,
       modified_date: new Date()
