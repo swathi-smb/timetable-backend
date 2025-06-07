@@ -14,6 +14,7 @@ import pendingUserRoutes from './routes/pendingUserRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import staffProfileRoutes from './routes/staffProfileRoutes.js';
 // import manageStudentRoutes from './routes/manageStudentRoutes.js';
+import savedTimetableRoutes from "./routes/savedTimetableRoutes.js";
 
 dotenv.config();
 
@@ -39,6 +40,15 @@ app.use("/api/subjects", subjectRoutes);
 app.use("/api/timetable", timetableRoutes);
 app.use('/api/users', pendingUserRoutes);
 app.use('/api/users', userRoutes);
+// Debug middleware for saved timetables
+app.use("/api/saved-timetables", (req, res, next) => {
+  console.log('[Server] Saved timetables request:', {
+    method: req.method,
+    url: req.url,
+    body: req.body
+  });
+  next();
+}, savedTimetableRoutes);
 
 // Error handling
 app.use((err, req, res, next) => {
