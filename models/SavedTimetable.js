@@ -6,7 +6,7 @@ import School from "./School.js";
 import User from "./userModel.js";
 
 const SavedTimetable = sequelize.define(
-  "saved_timetable",
+  "saved_timetables",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -56,22 +56,15 @@ const SavedTimetable = sequelize.define(
         model: User,
         key: "user_id",
       },
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
+    }
+    // 🚫 Do NOT declare created_at or updated_at here
   },
   {
-    timestamps: true,
-    underscored: true,
+    tableName: 'saved_timetables',
+    timestamps: true, // Sequelize will automatically manage created_at and updated_at
+    underscored: true, // This ensures it uses snake_case fields like created_at
   }
 );
+
 
 export default SavedTimetable; 

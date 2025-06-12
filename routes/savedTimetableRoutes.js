@@ -61,8 +61,11 @@ router.post('/save', verifyToken, async (req, res) => {
       department_id,
       school_id,
       course_name,
-      created_by: req.user.userId // Using userId from the token instead of user_id
+      created_by: req.user.userId
     });
+    
+    console.log('[SavedTimetables] Successfully saved to DB:', savedTimetable?.id, savedTimetable?.name);
+    
 
     res.status(201).json({
       success: true,
