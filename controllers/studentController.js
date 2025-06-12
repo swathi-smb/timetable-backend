@@ -1,4 +1,4 @@
-import { pool } from '../config/db.js';
+import pool  from '../config/db.js';
 import Student from '../models/Student.js';
 import School from '../models/School.js';
 import Department from '../models/Department.js';
