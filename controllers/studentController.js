@@ -185,7 +185,7 @@ export const updateStudent = async (req, res) => {
     }
     
     // Check if roll number exists for other students
-    const [existingStudent] = await pool.promise().query(
+    const [existingStudent] = await pool.query(
       'SELECT * FROM students WHERE roll_number = ? AND student_id != ?',
       [roll_number, id]
     );
@@ -195,7 +195,7 @@ export const updateStudent = async (req, res) => {
     }
     
     // Update student
-    await pool.promise().query(
+    await pool.query(
       `UPDATE students 
        SET student_name = ?, 
            roll_number = ?, 
@@ -226,7 +226,7 @@ export const deleteStudent = async (req, res) => {
     }
 
     // Check if student exists
-    const [studentRows] = await pool.promise().query(
+    const [studentRows] = await pool.query(
       'SELECT * FROM students WHERE student_id = ?',
       [id]
     );
@@ -238,7 +238,7 @@ export const deleteStudent = async (req, res) => {
     // First, delete related records
     try {
       // Delete attendance records
-      await pool.promise().query(
+      await pool.query(
         'DELETE FROM attendance WHERE student_id = ?',
         [id]
       );
@@ -247,7 +247,7 @@ export const deleteStudent = async (req, res) => {
       // For example: grades, assignments, etc.
 
       // Finally delete the student
-      const [deleteResult] = await pool.promise().query(
+      const [deleteResult] = await pool.query(
         'DELETE FROM students WHERE student_id = ?',
         [id]
       );
