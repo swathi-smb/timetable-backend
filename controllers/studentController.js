@@ -219,24 +219,45 @@ export const updateStudent = async (req, res) => {
 // Delete a student
 export const deleteStudent = async (req, res) => {
   try {
-    const { id } = req.params;
-    
+    const id = parseInt(req.params.id);
+
+    if (isNaN(id)) {
+      return res.status(400).json({ message: 'Invalid student ID' });
+    }
+
     // Check if student exists
-    const [student] = await pool.promise().query(
+    const [studentRows] = await pool.promise().query(
       'SELECT * FROM students WHERE student_id = ?',
       [id]
     );
-    
-    if (student.length === 0) {
+
+    if (studentRows.length === 0) {
       return res.status(404).json({ message: 'Student not found' });
     }
-    
-    // Delete student
-    await pool.promise().query('DELETE FROM students WHERE student_id = ?', [id]);
-    
-    res.json({ message: 'Student deleted successfully' });
+
+    // Try deleting the student
+    const [deleteResult] = await pool.promise().query(
+      'DELETE FROM students WHERE student_id = ?',
+      [id]
+    );
+
+    // Optional: confirm row was deleted
+    if (deleteResult.affectedRows === 0) {
+      return res.status(500).json({ message: 'Student could not be deleted' });
+    }
+
+    res.json({ message: '✅ Student deleted successfully', deletedId: id });
   } catch (error) {
-    console.error('Error deleting student:', error);
-    res.status(500).json({ message: 'Error deleting student', error: error.message });
+    console.error('Error deleting student:', {
+      message: error.message,
+      code: error.code,
+      sqlMessage: error.sqlMessage,
+      sql: error.sql
+    });
+
+    res.status(500).json({
+      message: '❌ Error deleting student',
+      error: error.sqlMessage || error.message
+    });
   }
-}; 
+};
