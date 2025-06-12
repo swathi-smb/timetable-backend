@@ -235,46 +235,17 @@ export const deleteStudent = async (req, res) => {
       return res.status(404).json({ message: 'Student not found' });
     }
 
-    // First, delete related records
-    try {
-      // Delete attendance records
-      await pool.query(
-        'DELETE FROM attendance WHERE student_id = ?',
-        [id]
-      );
+    // Delete the student directly since there are no related tables
+    const [deleteResult] = await pool.query(
+      'DELETE FROM students WHERE student_id = ?',
+      [id]
+    );
 
-      // Delete any other related records here
-      // For example: grades, assignments, etc.
-
-      // Finally delete the student
-      const [deleteResult] = await pool.query(
-        'DELETE FROM students WHERE student_id = ?',
-        [id]
-      );
-
-      if (deleteResult.affectedRows === 0) {
-        return res.status(500).json({ message: 'Student could not be deleted' });
-      }
-
-      res.json({ message: '✅ Student deleted successfully', deletedId: id });
-    } catch (deleteError) {
-      console.error('Error during deletion:', {
-        message: deleteError.message,
-        code: deleteError.code,
-        sqlMessage: deleteError.sqlMessage,
-        sql: deleteError.sql
-      });
-
-      // Check for foreign key constraint violation
-      if (deleteError.code === 'ER_ROW_IS_REFERENCED_2') {
-        return res.status(409).json({
-          message: 'Cannot delete student because they have associated records',
-          error: 'This student has related records in other tables that must be deleted first'
-        });
-      }
-
-      throw deleteError; // Re-throw other errors to be caught by outer catch
+    if (deleteResult.affectedRows === 0) {
+      return res.status(500).json({ message: 'Student could not be deleted' });
     }
+
+    res.json({ message: '✅ Student deleted successfully', deletedId: id });
   } catch (error) {
     console.error('Error deleting student:', {
       message: error.message,
@@ -285,8 +256,7 @@ export const deleteStudent = async (req, res) => {
 
     res.status(500).json({
       message: '❌ Error deleting student',
-      error: error.sqlMessage || error.message,
-      details: 'Please ensure all related records are deleted first'
+      error: error.sqlMessage || error.message
     });
   }
 };
