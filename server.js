@@ -13,6 +13,7 @@ import timetableRoutes from './routes/timetableRoutes.js';
 import pendingUserRoutes from './routes/pendingUserRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import staffProfileRoutes from './routes/staffProfileRoutes.js';
+import studentProfileRoutes from './routes/studentProfileRoutes.js';
 // import manageStudentRoutes from './routes/manageStudentRoutes.js';
 import savedTimetableRoutes from "./routes/savedTimetableRoutes.js";
 
@@ -35,6 +36,7 @@ app.use("/api/admin", verifyToken, checkRole(["1"]), adminRoutes);
 app.use("/api/staff", verifyToken, staffRoutes);
 app.use("/api/staff-profile", staffProfileRoutes);  // New staff profile routes (no auth required for registration)
 app.use("/api/student", studentRoutes);  // Student routes (including public roll number endpoint)
+app.use("/api/student-profile", studentProfileRoutes);
 app.use("/api/schools", schoolRoutes);
 app.use("/api/subjects", subjectRoutes);
 app.use("/api/timetable", timetableRoutes);
